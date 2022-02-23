@@ -10,7 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableJpaRepositories
 @EnableRetry
-@EnableScheduling
+//@EnableScheduling
 public class EmployeeOperationsApplication {
 
 	public static void main(String[] args) {
