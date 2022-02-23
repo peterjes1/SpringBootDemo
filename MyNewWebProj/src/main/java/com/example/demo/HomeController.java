@@ -18,7 +18,7 @@ public class HomeController {
 		
 		mv.addObject("alien", alien);
 		
-		mv.setViewName("home");
+		mv.setViewName("home");   
 		
 		return mv;
 		
