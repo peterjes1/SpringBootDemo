@@ -2,6 +2,7 @@ package com.example.demo.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import org.hibernate.annotations.ColumnDefault;
@@ -12,7 +13,7 @@ import org.hibernate.annotations.DynamicInsert;
 public class Employee {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int eId;
 	private String eName;
 	private String eDesignation;
@@ -31,6 +32,12 @@ public class Employee {
 		this.eName = eName;
 		this.eDesignation = eDesignation;
 		this.activeYN = activeYN;
+	}
+
+	public Employee(String eName, String eDesignation) {
+		super();
+		this.eName = eName;
+		this.eDesignation = eDesignation;
 	}
 
 	@Override

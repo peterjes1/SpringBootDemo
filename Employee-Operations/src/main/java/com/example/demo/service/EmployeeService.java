@@ -72,9 +72,11 @@ public class EmployeeService {
 	}
 	
 	public Employee updateEmployee(Employee emp) {
-		Employee existingEmployee=repo.findById(emp.geteId()).orElse(new Employee());
-		existingEmployee.seteName(emp.geteName());
-		existingEmployee.seteDesignation(emp.geteDesignation());
+		
+		  Employee existingEmployee=repo.findById(emp.geteId()).orElse(new Employee());
+		  existingEmployee.seteName(emp.geteName());
+		  existingEmployee.seteDesignation(emp.geteDesignation());
+		 
 		return repo.save(existingEmployee);
 	}
 	
