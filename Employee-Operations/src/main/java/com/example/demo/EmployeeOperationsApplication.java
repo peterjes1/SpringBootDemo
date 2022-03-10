@@ -23,7 +23,7 @@ public class EmployeeOperationsApplication implements CommandLineRunner {
 	}
 
 	@Override
-	public void run(String... args) throws Exception {
+	public void run(String... args) /*throws Exception*/ {
 //		Employee emp = new Employee("Peter","ASE");
 //		Employee emp1 = new Employee("mani","ASE");
 //		Employee emp2 = new Employee("Jagan","ASE");
