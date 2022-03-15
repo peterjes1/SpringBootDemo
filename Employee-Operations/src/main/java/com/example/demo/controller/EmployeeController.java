@@ -19,11 +19,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Employee;
 import com.example.demo.entity.JwtRequest;
 import com.example.demo.entity.JwtResponse;
+import com.example.demo.entity.UserDAO;
+import com.example.demo.repository.UserRepository;
 import com.example.demo.service.EmployeeService;
 import com.example.demo.service.MyUserDetailsService;
 import com.example.demo.util.JWTUtility;
@@ -45,6 +48,8 @@ public class EmployeeController {
 	
 	
 	
+	
+	
 	@Autowired
 	EmployeeService empService;
 	
@@ -54,6 +59,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/authenticate")
+	@Cacheable
 	public JwtResponse authenticate(@RequestBody JwtRequest jwtRequest) {
 		try {
 			authenticationManager.authenticate(
@@ -71,6 +77,11 @@ public class EmployeeController {
 		
 		return new JwtResponse(token);
 		
+	}
+	
+	@PostMapping("/register")
+	public UserDAO register(@RequestBody UserDAO user) {
+		return userDetailsService.saveUser(user);
 	}
 	
 	@GetMapping("/getEmployee/{eId}")
