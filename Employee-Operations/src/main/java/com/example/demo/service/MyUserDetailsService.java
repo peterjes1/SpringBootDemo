@@ -13,7 +13,13 @@ public class MyUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		if (username.equals("jo")){
 		return new User("jo", "jens",new ArrayList<>());
+		}
+		else {
+		throw new UsernameNotFoundException("invalid username");
 	}
+		
 
+}
 }

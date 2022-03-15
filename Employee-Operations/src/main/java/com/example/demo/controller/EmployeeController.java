@@ -30,7 +30,7 @@ import com.example.demo.util.JWTUtility;
 
 @RestController
 @EnableCaching
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin
 @CacheConfig(cacheNames = {"employees"})
 public class EmployeeController {
 
