@@ -17,7 +17,26 @@ public class Employee {
 	private int eId;
 	private String eName;
 	private String eDesignation;
+	private String eMail;
+	private String location;
 	
+	public Employee(int eId, String eName, String eDesignation, String eMail, String activeYN) {
+		super();
+		this.eId = eId;
+		this.eName = eName;
+		this.eDesignation = eDesignation;
+		this.eMail = eMail;
+		this.activeYN = activeYN;
+	}
+
+	public String geteMail() {
+		return eMail;
+	}
+
+	public void seteMail(String eMail) {
+		this.eMail = eMail;
+	}
+
 	@ColumnDefault("'Y'")
 	private String activeYN;
 	
@@ -26,28 +45,36 @@ public class Employee {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(int eId, String eName, String eDesignation, String activeYN) {
-		super();
-		this.eId = eId;
-		this.eName = eName;
-		this.eDesignation = eDesignation;
-		this.activeYN = activeYN;
-	}
+	
 
-	public Employee(String eName, String eDesignation) {
+	public Employee(String eName, String eDesignation, String eMail,String location) {
 		super();
 		this.eName = eName;
 		this.eDesignation = eDesignation;
+		this.eMail = eMail;
+		this.location = location;
 	}
 
 	@Override
 	public String toString() {
 		return "Employee [eId=" + eId + ", eName=" + eName + ", eDesignation=" + eDesignation + ", activeYN=" + activeYN
-				+ "]";
+				+ ", eMail=" +eMail+"location="+location+"]";
 	}
 
 	public int geteId() {
 		return eId;
+	}
+	
+	public String getEmail() {
+		return eMail;
+	}
+	
+	public String getLocation() {
+		return location;
+	}
+	 
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
 	public void seteId(int eId) {

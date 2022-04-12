@@ -32,7 +32,7 @@ public class EmployeeService {
 		return repo.getEmployees();
 	}
 	
-	@Retryable(value = ResourceNotFoundException.class, maxAttempts = 3, backoff = @Backoff(delay = 3000))
+//	@Retryable(value = ResourceNotFoundException.class, maxAttempts = 3, backoff = @Backoff(delay = 3000))
 	public Employee getEmployee(int eId) {
 		Employee emp = repo.getEmployee(eId);
 		if(emp==null) {
