@@ -95,6 +95,11 @@ public class EmployeeController {
 	public List<Employee> getEmployees(){
 		return empService.getEmployees();
 	}
+
+	@PostMapping("/isAdmin")
+	public Boolean isAdmin(@RequestBody JwtResponse token){
+		return jwtUtility.getIsAdmin(token.getJwtToken());
+	}
 	
 	@PostMapping("/saveEmployee")
 	@CacheEvict(allEntries = true)

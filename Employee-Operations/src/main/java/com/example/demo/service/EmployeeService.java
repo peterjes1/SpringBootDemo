@@ -76,6 +76,9 @@ public class EmployeeService {
 		  Employee existingEmployee=repo.findById(emp.geteId()).orElse(new Employee());
 		  existingEmployee.seteName(emp.geteName());
 		  existingEmployee.seteDesignation(emp.geteDesignation());
+		  existingEmployee.seteMail(emp.geteMail());
+		  existingEmployee.setLocation(emp.getLocation());
+
 		 
 		return repo.save(existingEmployee);
 	}
@@ -85,6 +88,8 @@ public class EmployeeService {
 		Employee existingEmployee=repo.findById(eId).orElseThrow(()-> new ResourceNotFoundException("Employee with the id "+eId+" is not present"));
 		existingEmployee.seteName(emp.geteName());
 		existingEmployee.seteDesignation(emp.geteDesignation());
+		existingEmployee.setLocation(emp.getLocation());
+		existingEmployee.seteMail(emp.geteMail());
 		return repo.save(existingEmployee);
 	}
 	

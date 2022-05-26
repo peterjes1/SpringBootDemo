@@ -20,12 +20,13 @@ public class Employee {
 	private String eMail;
 	private String location;
 	
-	public Employee(int eId, String eName, String eDesignation, String eMail, String activeYN) {
+	public Employee(int eId, String eName, String eDesignation, String eMail,String location, String activeYN) {
 		super();
 		this.eId = eId;
 		this.eName = eName;
 		this.eDesignation = eDesignation;
 		this.eMail = eMail;
+		this.location = location;
 		this.activeYN = activeYN;
 	}
 

@@ -1,5 +1,8 @@
 package com.example.demo.entity;
 
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DynamicInsert;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
+@DynamicInsert
 @Table(name = "user")
 public class UserDAO {
 
@@ -16,14 +20,15 @@ public class UserDAO {
 	
 	private String username;
 	private String password;
-	
+	@ColumnDefault("'ROLE_USER'")
+	private String role;
 	public UserDAO(String username, String password, String role) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.role = role;
 	}
-	
+
 	public UserDAO() {
 		super();
 		
@@ -35,6 +40,11 @@ public class UserDAO {
 		this.username = username;
 		this.password = password;
 		this.role = role;
+	}
+
+	public UserDAO(String username, String password) {
+		this.username = username;
+		this.password = password;
 	}
 
 	public int getId() {
@@ -61,6 +71,6 @@ public class UserDAO {
 	public void setRole(String role) {
 		this.role = role;
 	}
-	private String role;
+
 	
 }

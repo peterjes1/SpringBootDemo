@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,8 @@ public class MyUserDetailsService implements UserDetailsService {
 		UserDAO user = userrepo.findByUsername(username);
 		
 		if(user!=null) {
-			roles = Arrays.asList(new SimpleGrantedAuthority(username));
+			roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
+
 			return new User(user.getUsername(),user.getPassword(),roles);
 		}
 		
@@ -51,4 +53,8 @@ public class MyUserDetailsService implements UserDetailsService {
 	public UserDAO saveUser(UserDAO user) {
 		return userrepo.save(user);
 	}
+
+
 }
+
+

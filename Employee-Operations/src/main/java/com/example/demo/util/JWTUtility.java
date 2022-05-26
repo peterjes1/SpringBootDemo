@@ -1,12 +1,12 @@
 package com.example.demo.util;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -53,7 +53,19 @@ public class JWTUtility implements Serializable {
 	// generate token for user
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
+		Collection<? extends GrantedAuthority> roles = userDetails.getAuthorities();
+
+		if (roles.contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+			claims.put("isAdmin", true);
+		}
+		if (roles.contains(new SimpleGrantedAuthority("ROLE_USER"))) {
+			claims.put("isUser", true);
+		}
+
+
 		return doGenerateToken(claims, userDetails.getUsername());
+
+
 	}
 
 	// while creating the token -
@@ -71,4 +83,26 @@ public class JWTUtility implements Serializable {
 		return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
 	}
 
+
+	public List<SimpleGrantedAuthority> getRolesFromToken(String authToken) {
+		List<SimpleGrantedAuthority> roles = null;
+		Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken).getBody();
+		Boolean isAdmin = claims.get("isAdmin", Boolean.class);
+		Boolean isUser = claims.get("isUser", Boolean.class);
+		if (isAdmin != null && isAdmin == true) {
+			roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		}
+		if (isUser != null && isUser == true) {
+			roles = Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		}
+
+		return roles;
+
+	}
+
+    public Boolean getIsAdmin(String authToken){
+		Claims claims = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(authToken).getBody();
+		Boolean isAdmin = claims.get("isAdmin", Boolean.class);
+		return isAdmin;
+	}
 }
